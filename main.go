@@ -8,55 +8,53 @@ import (
 	"strconv"
 )
 
-func getRandomNumer(start int, end int) int {
+func getRandomNumber(start int, end int) int {
+	if start == end {
+		return start
+	}
 
-    if start == end {
-        return start
-    }
+	if start > end {
+		start, end = end, start
+	}
 
-    if start > end {
-        start, end = end, start
-    }
+	return (rand.Intn(end-start+1) + start)
+}
 
-    return (rand.Intn(end - start + 1) + start)
-
+func handleError(err error, errMsg string) {
+	if err != nil {
+		fmt.Println(errMsg)
+		os.Exit(1)
+	}
 }
 
 func main() {
-    var start int
-    var end int
-    var result int
-    var err error
+	var start int
+	var end int
+	var result int
+	var err error
 
-    flag.Parse()
+	flag.Parse()
 
-    args := flag.Args()
+	args := flag.Args()
 
-    if len(args) < 2 {
-        end, err = strconv.Atoi(args[0])
-        if err != nil {
-            fmt.Println("Invalid start value")
-            os.Exit(1)
-        }
+	if len(args) < 2 {
+		end, err = strconv.Atoi(args[0])
+		handleError(err, "Invalid end value")
 
-        result = getRandomNumer(1, end)
+		result = getRandomNumber(1, end)
 
-        fmt.Println(result)
-    } else {
-        start, err = strconv.Atoi(args[0])
-        if err != nil {
-            fmt.Println("Invalid start value")
-        }
+		fmt.Println(result)
+	} else {
+		start, err = strconv.Atoi(args[0])
+		handleError(err, "Invalid start value")
 
-        end, err = strconv.Atoi(args[1])
-        if err != nil {
-            fmt.Println("Invalid end value")
-        }
+		end, err = strconv.Atoi(args[1])
+		handleError(err, "Invalid end value")
 
-        result = getRandomNumer(start, end)
-        
-        fmt.Println(result)
-    }
+		result = getRandomNumber(start, end)
 
-    os.Exit(0)
+		fmt.Println(result)
+	}
+
+	os.Exit(0)
 }
