@@ -16,6 +16,29 @@ rnum 5 15            # Returns random number between 5-15
 
 ## Installation
 
+### Using build.sh (Linux)
+
+1. Ensure you have Go installed:
+
+    ```bash
+    go version
+    ```
+
+2. Make the script executable and run it:
+
+    ```bash
+    chmod +x ./build.sh
+    ./build.sh
+    ```
+
+    This builds the binary and installs it to `/usr/local/bin/rnum` (requires sudo).
+
+3. Verify:
+    ```bash
+    which rnum
+    rnum 1 10
+    ```
+
 ### From Source
 
 1. **Prerequisites**: Make sure you have Go installed (1.16 or later)
@@ -72,4 +95,4 @@ rnum 100    # Same as: rnum 1 100
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT License. See [LICENSE](LICENSE)
